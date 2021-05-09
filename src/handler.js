@@ -19,7 +19,6 @@ const addNoteHandler = (request, h) => {
   if (isSuccess) {
     console.log(`Current notes record length: ${notes.length}`);
     const response = h.response({
-      error: false,
       status: 'success',
       message: 'New note record added!',
       data: {
