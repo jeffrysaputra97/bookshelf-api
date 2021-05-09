@@ -1,6 +1,7 @@
 const {
   indexBooks,
   addBook,
+  getBookById,
 } = require('./handler');
 
 const routes = [
@@ -18,6 +19,11 @@ const routes = [
     method: 'GET',
     path: '/books',
     handler: indexBooks,
+  },
+  {
+    method: 'GET',
+    path: '/books/{id}',
+    handler: getBookById,
   },
   {
     method: 'POST',
