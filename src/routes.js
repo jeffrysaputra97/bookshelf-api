@@ -2,6 +2,8 @@ const {
   indexBooks,
   addBook,
   getBookById,
+  updateBookById,
+  deleteBookById,
 } = require('./handler');
 
 const routes = [
@@ -31,9 +33,19 @@ const routes = [
     handler: addBook,
   },
   {
+    method: 'PUT',
+    path: '/books/{id}',
+    handler: updateBookById,
+  },
+  {
+    method: 'DELETE',
+    path: '/books/{id}',
+    handler: deleteBookById,
+  },
+  {
     method: '*',
     path: '/{any*}',
-    handler: () => 'Not Found!',
+    handler: () => '404 Page Not Found!',
   },
 ];
 
