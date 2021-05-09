@@ -1,4 +1,7 @@
-const { addBook } = require('./handler');
+const {
+  indexBooks,
+  addBook,
+} = require('./handler');
 
 const routes = [
   {
@@ -10,6 +13,11 @@ const routes = [
     method: '*',
     path: '/',
     handler: () => 'Unhandled method for / path!',
+  },
+  {
+    method: 'GET',
+    path: '/books',
+    handler: indexBooks,
   },
   {
     method: 'POST',
