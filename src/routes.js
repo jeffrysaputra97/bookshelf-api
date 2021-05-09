@@ -1,13 +1,10 @@
-const { addNoteHandler } = require('./handler');
+const { addBook } = require('./handler');
 
 const routes = [
   {
     method: 'GET',
     path: '/',
-    handler: () => {
-      console.log('Homepage');
-      return 'Homepage';
-    },
+    handler: () => 'Homepage',
   },
   {
     method: '*',
@@ -15,19 +12,9 @@ const routes = [
     handler: () => 'Unhandled method for / path!',
   },
   {
-    method: 'GET',
-    path: '/about',
-    handler: () => 'About',
-  },
-  {
-    method: '*',
-    path: '/about',
-    handler: () => 'Unhandled method for /about path!',
-  },
-  {
     method: 'POST',
-    path: '/notes',
-    handler: addNoteHandler,
+    path: '/books',
+    handler: addBook,
   },
   {
     method: '*',

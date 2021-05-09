@@ -1,28 +1,63 @@
 const { nanoid } = require('nanoid');
-const notes = require('./notes');
+const books = require('./books');
 
-const addNoteHandler = (request, h) => {
-  const { title, tags, body } = request.payload;
+const addBook = (request, h) => {
+  const {
+    name, year, author, summary, publisher, pageCount, readPage, reading,
+  } = request.payload;
+
+  // Validation phase
+  if (!name) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal menambahkan buku. Mohon isi nama buku',
+    });
+
+    response.code(400);
+    return response;
+  }
+
+  if (readPage > pageCount) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
+    });
+
+    response.code(400);
+    return response;
+  }
 
   const id = nanoid(16);
-  const createdAt = new Date().toISOString();
-  const updatedAt = createdAt;
+  const finished = pageCount === readPage;
+  const insertedAt = new Date().toISOString();
+  const updatedAt = insertedAt;
 
-  const newNote = {
-    title, tags, body, id, createdAt, updatedAt,
+  const book = {
+    id,
+    name,
+    year,
+    author,
+    summary,
+    publisher,
+    pageCount,
+    readPage,
+    finished,
+    reading,
+    insertedAt,
+    updatedAt,
   };
 
-  notes.push(newNote);
+  books.push(book);
 
-  const isSuccess = notes.filter((note) => note.id === id).length > 0;
+  const isSuccess = books.filter((note) => note.id === id).length > 0;
 
   if (isSuccess) {
-    console.log(`Current notes record length: ${notes.length}`);
+    console.log(`Current books record length: ${books.length}`);
     const response = h.response({
       status: 'success',
-      message: 'New note record added!',
+      message: 'Buku berhasil ditambahkan',
       data: {
-        noteId: id,
+        bookId: id,
       },
     });
 
@@ -39,4 +74,4 @@ const addNoteHandler = (request, h) => {
   return response;
 };
 
-module.exports = { addNoteHandler };
+module.exports = { addBook };
