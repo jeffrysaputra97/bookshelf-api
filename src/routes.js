@@ -45,7 +45,7 @@ const routes = [
   {
     method: '*',
     path: '/{any*}',
-    handler: () => 'Not Found!',
+    handler: () => '404 Page Not Found!',
   },
 ];
 
