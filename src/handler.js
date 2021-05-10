@@ -90,7 +90,7 @@ const addBook = (request, h) => {
 
   books.push(book);
 
-  const isSuccess = books.filter((note) => note.id === id).length > 0;
+  const isSuccess = books.filter((item) => item.id === id).length > 0;
 
   if (isSuccess) {
     console.log(`Current books record length: ${books.length}`);
