@@ -93,7 +93,6 @@ const addBook = (request, h) => {
   const isSuccess = books.filter((item) => item.id === id).length > 0;
 
   if (isSuccess) {
-    console.log(`Current books record length: ${books.length}`);
     const response = h.response({
       status: 'success',
       message: 'Buku berhasil ditambahkan',
