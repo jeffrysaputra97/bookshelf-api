@@ -1,8 +1,27 @@
 const { nanoid } = require('nanoid');
 const books = require('./books');
 
-const indexBooks = (_, h) => {
-  const result = books.map((item) => {
+const indexBooks = (request, h) => {
+  // Get Query Parameters
+  let { name, reading, finished } = request.query;
+  let filteredBooks = books;
+
+  if (name !== undefined) {
+    name = name.toLowerCase();
+    filteredBooks = filteredBooks.filter((item) => item.name.toLowerCase().includes(name));
+  }
+
+  if (reading !== undefined) {
+    reading = reading === '1';
+    filteredBooks = filteredBooks.filter((item) => item.reading === reading);
+  }
+
+  if (finished !== undefined) {
+    finished = finished === '1';
+    filteredBooks = filteredBooks.filter((item) => item.finished === finished);
+  }
+
+  const result = filteredBooks.map((item) => {
     const book = {
       id: item.id,
       name: item.name,
